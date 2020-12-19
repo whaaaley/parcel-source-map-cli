@@ -4,7 +4,7 @@
 
 This is a _super minimal_ CLI wrapper around [`@parcel/source-map`](https://github.com/parcel-bundler/source-map) to make it a bit easier to merge source maps together on the fly.
 
-Make sure to give [`@parcel/source-map`](https://github.com/parcel-bundler/source-map) a star. The fact that a group of developers is finally working on a fast source map package with a decent API is amazing. Despite being in alpha, it's already game changing.
+Make sure to give [`@parcel/source-map`](https://github.com/parcel-bundler/source-map) a star. The fact that a group of developers is finally working on a fast source map package with a decent API is amazing. Despite being in alpha it's already game changing.
 
 ## Usage
 
