@@ -1,55 +1,46 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
+const readline = require('readline')
 const SourceMap = require('@parcel/source-map').default
 const args = require('./parse-argv')(process.argv)
 
-const cli = () => {
-  // collect paths
-  const map = args['--map']
-  let paths = []
+const map = args['--map']
+const out = args['--out']
 
-  if (Array.isArray(map) === true) {
-    paths = paths.concat(map)
-  } else if (typeof map === 'string') {
-    paths.push(map)
-  } else {
-    return console.log('Invalid --map flag. Aborting...')
-  }
+let stdin = ''
+const rl = readline.createInterface({ input: process.stdin })
+rl.on('line', data => stdin += data)
 
-  // collect source maps
-  const files = process.stdin ? [process.stdin] : []
+const paths = Array.isArray(map) ? map : [map]
+const files = stdin === '' ? [] : [JSON.parse(stdin)]
+const sourceMap = new SourceMap()
 
-  for (let i = 0; i < paths.length; i++) {
-    const file = fs.readFileSync(paths[i])
-    const data = JSON.parse(file)
-    files.push(data)
-  }
+for (let i = 0; i < paths.length; i++) {
+  const file = fs.readFileSync(paths[i])
+  const data = JSON.parse(file)
+  files.push(data)
+}
 
-  // sadge
-  if (files.length < 2) {
-    return console.log('Too few source maps. Aborting...')
-  }
+if (files.length < 1) {
+  console.log('Too few source maps. Exiting...')
+  process.exit()
+}
 
-  // merge the source maps
-  const sourceMap = new SourceMap()
+for (let i = 0; i < files.length; i++) {
+  sourceMap.addRawMappings(files[i])
+}
 
-  for (let i = 0; i < files.length; i++) {
-    sourceMap.addRawMappings(files[i])
-  }
-
-  const data = sourceMap.stringify()
-
-  // output the source map
-  const out = args['--out']
+const go = async () => {
+  const data = await sourceMap.stringify()
 
   if (typeof out === 'string') {
-    console.log('Writing to', out, '...')
+    console.log('Writing to', out)
     fs.writeFileSync(out, data)
   } else {
-    console.log('No --out flag. Writing to stdout...')
+    // No --out flag. Writing to stdout...
     process.stdout.write(data)
   }
 }
 
-cli()
+go()
