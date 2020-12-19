@@ -2,10 +2,9 @@
 # parcel-source-map-cli
 > Unofficial CLI for @parcel/source-map
 
-This is a simple CLI wrapper around [`@parcel/source-map`](https://github.com/parcel-bundler/source-map).
-All you can do is merge source maps. Great for minimal builds.
+This is a _super minimal_ CLI wrapper around [`@parcel/source-map`](https://github.com/parcel-bundler/source-map) to make it a bit easier to merge source maps together on the fly.
 
-Tested only with `tsc` and `esbuild` generated source-maps. Your mileage may vary.
+Make sure to give [`@parcel/source-map`](https://github.com/parcel-bundler/source-map) a star. The fact that a group of developers is finally working on a fast source map package with a decent API is amazing. Despite being in alpha, it's already game changing.
 
 ## Usage
 
