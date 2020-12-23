@@ -1,5 +1,5 @@
 {
-  "name": "parcel-source-map-cli",
+  "name": "@whaaaley/parcel-source-map-cli",
   "version": "0.1.0",
   "description": "Unofficial CLI for @parcel/source-map",
   "license": "MIT",
@@ -7,6 +7,9 @@
   "main": "src/index.js",
   "bin": {
     "parcel-source-map": "src/index.js"
+  },
+  "scripts": {
+    "start": "npm publish --access public && npm publish --registry=https://npm.pkg.github.com"
   },
   "dependencies": {
     "@parcel/source-map": "^2.0.0-alpha.4.20"
