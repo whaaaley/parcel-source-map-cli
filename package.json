@@ -2,7 +2,7 @@
   "name": "@whaaaley/parcel-source-map-cli",
   "version": "0.1.0",
   "description": "Unofficial CLI for @parcel/source-map",
-  "license": "MIT",
+  "license": "ISC",
   "author": "Dustin Dowell",
   "main": "src/index.js",
   "bin": {
